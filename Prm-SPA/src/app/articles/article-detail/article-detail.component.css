@@ -1,0 +1,9 @@
+.good-answer {
+    color: #66DD66;
+    font-weight: bold;
+}
+
+.bad-answer {
+    color: #DD6666;
+    font-weight: bold;
+}

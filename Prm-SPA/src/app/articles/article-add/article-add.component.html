@@ -1,0 +1,64 @@
+<div class="card mb-4">
+
+    <div class="text-center mt-3">
+        <h2>Tworzenie nowego artykułu </h2>
+    </div>
+
+    <div class="container">
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Tytuł kursu</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" [(ngModel)]="title" />
+            </div>
+        </div>
+
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Treść kursu</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <ckeditor [editor]="Editor" [(ngModel)]="content"></ckeditor>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Test do  kursu</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <textarea [(ngModel)]="test" class="form-control" rows="10" ></textarea>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-primary" (click)="saveArticle()">zapisz kurs i pytania</button>
+
+                &nbsp;
+                <button type="button" class="btn btn-info" [routerLink]="['/articles']">Wróć do listy artykułów</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>

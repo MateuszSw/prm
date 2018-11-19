@@ -1,0 +1,88 @@
+<form [formGroup]="registerForm" (ngSubmit)="register()">
+  <h2 class="text-center text-primary">Zarejestruj sie na stronie </h2>
+  <hr>
+
+  <div class="form-group">
+      <label class="control-label" style="margin-right:10px">Jesteś: </label>
+      <label class="radio-inline">
+        <input class="mr-3" type="radio" value="Teacher" formControlName="status">Nauczycielem
+      </label>
+      <label class="radio-inline ml-3">
+        <input class="mr-3" type="radio" value="Student" formControlName="status">Studentem
+      </label>
+    </div>
+
+  <div class="form-group">
+    <input type="text" 
+      [ngClass]="{'is-invalid': registerForm.get('username').errors 
+        && registerForm.get('username').touched}"
+      class="form-control" 
+      formControlName="username" 
+      placeholder="Nazwa użytkownika">
+    <div class="invalid-feedback">Prosze podać nazwe użytkownika</div>
+  </div>
+
+  <div class="form-group">
+      <input [ngClass]="{'is-invalid': registerForm.get('surname').errors && registerForm.get('surname').touched}" class="form-control"
+        placeholder="Nazwisko" formControlName="surname">
+      <div class="invalid-feedback" *ngIf="registerForm.get('surname').touched && registerForm.get('surname').hasError('required')">Nie podano nazwiska</div>
+    </div>
+
+      <div class="form-group">
+          <input [ngClass]="{'is-invalid': registerForm.get('city').errors && registerForm.get('city').touched}" class="form-control"
+            placeholder="Miejsce zamieszkania" formControlName="city">
+          <div class="invalid-feedback" *ngIf="registerForm.get('city').touched && registerForm.get('city').hasError('required')">Nie podano miejsca zamieszkania</div>
+        </div>
+
+  <div class="form-group">
+    <input type="password" 
+      [ngClass]="{'is-invalid': registerForm.get('password').errors 
+        && registerForm.get('password').touched}"
+      class="form-control" 
+      formControlName="password" 
+      placeholder="Hasło">
+      <div class="invalid-feedback" 
+        *ngIf="registerForm.get('password').hasError('required') 
+          && registerForm.get('password').touched">
+          Brak podanego hasła
+      </div>
+      <div class="invalid-feedback" 
+      *ngIf="registerForm.get('password').hasError('minlength') 
+        && registerForm.get('password').touched">
+        Hasło musi mieć minimum 4 znaki
+    </div>
+    <div class="invalid-feedback" 
+    *ngIf="registerForm.get('password').hasError('maxlength') 
+      && registerForm.get('password').touched">
+      Hasło jest zbyt długie maks 8 znaków
+  </div>
+  </div>
+
+  <div class="form-group">
+      <input 
+        [ngClass]="{'is-invalid': registerForm.get('confirmPassword').errors 
+          && registerForm.get('confirmPassword').touched
+          || registerForm.get('confirmPassword').touched
+          && registerForm.hasError('mismatch')}"
+        type="password" 
+        class="form-control" 
+        formControlName="confirmPassword" 
+        placeholder="Powtórz hasło">
+        <div class="invalid-feedback" 
+        *ngIf="registerForm.get('confirmPassword').hasError('required') 
+          && registerForm.get('confirmPassword').touched">
+          brak wypełnionego pola powtórz hasło
+      </div>
+      <div class="invalid-feedback" 
+      *ngIf="registerForm.hasError('mismatch') 
+        && registerForm.get('confirmPassword').touched">
+        Hasła muszą sie zgadzac
+    </div>
+    </div>
+
+  <div class="form-group text-center">
+    <button class="btn btn-success" [disabled]="!registerForm.valid" type="submit">Zarejestruj</button>
+    <button class="btn btn-default" type="button" (click)="cancel()">Anuluj</button>
+  </div>
+  
+</form>

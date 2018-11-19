@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">edytuj role jako {{user.userName}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModal.hide()">
+     
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #rolesForm="ngForm" id="rolesForm">
+      <div class="form-check" *ngFor="let role of roles">
+        <input
+          class="form-check-input"
+          type="checkbox" value="role.name"
+          [checked]="role.check"
+          (change)="role.check = !role.check"
+          [disabled]="role.name === 'Admin'">
+        <label>{{role.name}}</label>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="bsModal.hide()">Anuluj</button>
+    <button type="button" class="btn btn-success" (click)="updateRoles()" form="rolesForm">Zapisz</button>
+  </div>

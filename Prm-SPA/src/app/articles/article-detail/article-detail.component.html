@@ -1,0 +1,122 @@
+<div class="card mb-4">
+
+    <div class="text-center mt-3">
+        <h2>Szczegóły artykułu</h2>
+        
+        <button *ngIf="checkAuthor()" class="btn btn-info" [routerLink]="['/articles/edit/', article.id]"><i class="fa fa-edit"></i></button>
+        &nbsp;
+        <button *ngIf="checkAuthorOrAdmin()" class="btn btn-info" (click)="deleteArticle()"><i class="fa fa-trash"></i></button>
+
+    </div>
+    <div *appHasRole="['Student']" class="text-center mt-3">
+            <button *ngIf="!isStudentOnList()" class="btn btn-info" (click)="addToArticle()">Zapisz sie na kurs</button>
+            <button *ngIf="isStudentOnList()" class="btn btn-primary" (click)="removeFromArticle()">anuluj zapsanie sie na kurs</button>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Autor kursu</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <a [routerLink]="['/users/', article.author.id]">
+                    {{article.author.surname}}
+                </a>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Tytuł kursu</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                {{article.title}}
+            </div>
+        </div>
+
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-12">
+                <h4>treść artykułu</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12" [innerHTML]="article.content">
+            </div>
+        </div>
+
+        <br />
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Zapisani studenci</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <ol>
+                    <li *ngFor="let student of article.students">
+                            <a [routerLink]="['/users/', student.id]">
+                                {{student.surname}}
+                            </a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row" *ngIf="isStudentOnList()||checkAuthor()">
+            <div class="col-md-12">
+                <h4>Test z wiedzy</h4>
+            </div>
+        </div>
+
+        <div class="row"  *ngIf="isStudentOnList()||checkAuthor()">
+            <h3>rozwiąż test z materiału</h3>
+            <div class="col-md-12">
+                <ol>
+                    
+                    <li *ngFor="let question of article.questions">
+                        <form>
+                                 {{question.value}}
+                                <span class="good-answer" *ngIf="question.isSelectedAnswerCorrect == true">Dobra odpowiedz</span>
+                                <span  class="bad-answer" *ngIf="question.isSelectedAnswerCorrect == false">Zła odpowiedz</span> 
+                        <ol>
+                        <li *ngFor="let answer of question.answers">
+                            <input name="options" ng-control="options" type="radio" (click)="setAnswer(answer,question)" />
+                                {{answer.value}}
+
+                        </li>
+                        </ol> 
+                    </form>                           
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+
+        <br  *ngIf="isStudentOnList()||checkAuthor()"/>
+
+        <div class="row" *ngIf="isStudentOnList()||checkAuthor()">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-info" [routerLink]="['/articles']">Powrót do listy artykułów</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>

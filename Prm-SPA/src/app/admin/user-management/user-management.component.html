@@ -1,0 +1,17 @@
+<div class="row">
+<table class="table">
+  <tr>
+    <th style="width: 10%"> Id</th>
+    <th style="width: 30%">Nazwa użytkownika</th>
+    <th style="width: 30%">Rola użytkownika</th>
+    <th style="width: 30%"></th>    
+  </tr>
+  <tr *ngFor="let user of users">
+    <td>{{user.id}}</td>
+    <td>{{user.userName}}</td>
+    <td>{{user.roles}}</td>
+    <td><button class="btn btn-info" (click)="editRolesModal(user)">Edycja ról</button> 
+      <button class="btn btn-danger" (click)="deleteUser(user)">Usuwanie użytkownika</button></td>
+  </tr>
+</table>
+</div>

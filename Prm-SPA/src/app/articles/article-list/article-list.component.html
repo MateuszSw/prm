@@ -1,0 +1,45 @@
+<div class="text-center mt-3" *appHasRole="['Teacher']">
+  <button class="btn navbar-dark bg-info" [routerLink]="['/articles/add']">Dodaj nowy kurs</button>
+</div>
+
+
+<div class="text-center mt-3">
+  <h2>Kursy - {{pagination.totalItems}} znalezione</h2>
+</div>
+
+<div class="container">
+
+  <form class="form-inline " #form="ngForm" (ngSubmit)="loadArticles()" novalidate>
+
+    <div class="form-group px-2">
+
+    </div>
+    <div class="col">
+      <div class="btn-group float-right">
+        <button type="button" name="showAll" class="btn btn-info" 
+         [(ngModel)]="articleParams.showAll" (click)="loadArticles()" btnRadio="true">Pokaż wszystkie kursy</button>
+        <button type="button" name="showAll" class="btn btn-info" 
+         [(ngModel)]="articleParams.showAll" (click)="loadArticles()" btnRadio="false">Pokaż kursy tylko moje</button>
+      </div>
+    </div>
+
+  </form>
+  <br>
+
+
+  <div class="row">
+    <div *ngFor="let article of articles" class="col-md-12 text-center">
+
+      <a [routerLink]="['/articles/', article.id]">
+        {{article.title}}
+      </a>
+      &nbsp;
+          <button *ngIf="checkAuthorOrAdmin(article)" class="btn btn-info" [routerLink]="['/articles/edit/', article.id]"><i
+            class="fa fa-edit"></i></button>
+            &nbsp;
+            <button *ngIf="checkAuthorOrAdmin(article)" class="btn btn-info" (click)="deleteArticle(article)"><i
+              class="fa fa-trash"></i></button>
+    </div>
+  </div>
+</div>
+

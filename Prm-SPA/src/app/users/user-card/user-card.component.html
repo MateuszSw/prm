@@ -1,0 +1,19 @@
+<div class="card mb-4">
+  <div class="card-img-wrapper">
+    <img class="card-img-top" src="{{user.photoSrc || '../../../assets/people.png'}}" alt="{{user.surname}}">
+    <ul class="list-inline   text-center">
+      
+      
+    </ul>
+  </div>
+  
+  <div class="card-body p-1 text-center">
+      <li class="list-inline-item text-center"><button class="btn btn-info"
+        [routerLink]="['/users/', user.id]"><i class="fa fa-user"></i></button></li>
+        <li class="list-inline-item"><button class="btn btn-info" [routerLink]="['/users/', user.id]" [queryParams]="{tab: 3}" ><i class="fa fa-envelope"></i></button></li>
+    <h6 class="card-title text-center mb-1"><i class="fa fa-user"></i>
+      {{user.surname}}
+    </h6>
+    <p class="card-text text-muted text-center">{{user.city}}</p>
+  </div>
+</div>

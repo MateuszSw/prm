@@ -1,0 +1,54 @@
+<div class="container mt-4">
+  <div class="row">
+    <h1>{{user.surname}} profil</h1>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <img class="card-img-top img-thumbnail" src="{{user.photoSrc || '../../../assets/people.png'}}" alt="{{user.surname}}">
+        <div class="card-body">
+          <div>
+            <strong>Miejsce zamieszkania:</strong>
+            <p>{{user.city}}</p>
+          </div>
+          <div>
+            <strong>Ostatnia aktywność :</strong>
+            <p>{{user.lastActive | timeAgo}}</p>
+          </div>
+          <div>
+            <strong>Data stworzenia profilu:</strong>
+            <p>{{user.created | date: 'mediumDate'}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="tab-panel">
+        <tabset class="user-tabset" #memberTabs>
+          <tab heading="Wiadomości">
+            <app-user-messages [recipientId]="user.id"></app-user-messages>
+          </tab>
+          <tab heading="kursy">
+              <h4>stworzone artykuły</h4>  
+              <ol>
+                  <li *ngFor="let article of user.createdArticles">
+                          <a [routerLink]="['/articles/', article.id]">
+                              {{article.title}}
+                          </a>
+                  </li>
+              </ol>
+              <br/>
+              <h4>zapisane kursy</h4>  
+              <ol >
+                  <li *ngFor="let article of user.subscribedArticles">
+                          <a [routerLink]="['/articles/', article.id]">
+                              {{article.title}}
+                          </a>
+                  </li>
+              </ol>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>
